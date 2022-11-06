@@ -1,0 +1,29 @@
+﻿<Project>
+  <PropertyGroup>
+    <OutputPath>$(SolutionDir)out\$(Configuration)</OutputPath>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <Authors>Sharper</Authors>
+    <Version>0.8.0.0</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>2022.1</FileVersion>
+    <PackageVersion>$(FileVersion)</PackageVersion>
+    <Title>GstarCAD Extension Library</Title>
+    <Product>GstarCAD Extension Library</Product>
+    <AssemblyTitle>GstarCAD Extension Library</AssemblyTitle>
+    <Description>An unofficial geometry extension library enhanced for GstarCAD .NET SDK</Description>
+    <Copyright>Copyright (c) Sharper under MIT License</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/sharperzhou/GstarCAD.Extensions.Geometry</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sharperzhou/GstarCAD.Extensions.Geometry</RepositoryUrl>
+    <PackageIconUrl>https://avatars.githubusercontent.com/u/20104589?s=400&amp;u=eb97a1794c51430aa7ee914beee1731dce26e4db&amp;v=4</PackageIconUrl>
+    <PackageIcon>logo.jpg</PackageIcon>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>GstarCAD, SDK, .NET Extension</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath=""/>
+    <None Include="../logo.jpg" Pack="true" PackagePath=""/>
+  </ItemGroup>
+</Project>
