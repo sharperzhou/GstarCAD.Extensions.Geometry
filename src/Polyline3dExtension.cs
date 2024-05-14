@@ -1,5 +1,10 @@
-﻿using GrxCAD.DatabaseServices;
+﻿#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+using Gssoft.Gscad.DatabaseServices;
+#else
 using GrxCAD.Geometry;
+using GrxCAD.DatabaseServices;
+#endif
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {

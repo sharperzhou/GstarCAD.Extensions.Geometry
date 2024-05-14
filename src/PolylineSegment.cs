@@ -1,5 +1,10 @@
 ﻿using System;
+
+#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+#else
 using GrxCAD.Geometry;
+#endif
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {

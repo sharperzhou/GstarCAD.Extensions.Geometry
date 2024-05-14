@@ -1,5 +1,12 @@
-﻿using System;
+﻿using static System.Math;
+
+#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+using Gssoft.Gscad.Runtime;
+#else
 using GrxCAD.Geometry;
+using GrxCAD.Runtime;
+#endif
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {
@@ -18,7 +25,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// <param name="arc">The instance to which the method applies.</param>
         /// <param name="point">The Point2d to which tangents are searched.</param>
         /// <returns>An array of LineSegment3d representing the tangents (2) or <c>null</c> if there is none.</returns>
-        /// <exception cref="GrxCAD.Runtime.Exception">
+        /// <exception cref="Exception">
         /// eNonCoplanarGeometry is thrown if the objects do not lies on the same plane.</exception>
         public static LineSegment3d[] GetTangentsTo(this CircularArc3d arc, Point3d point)
         {
@@ -26,9 +33,8 @@ namespace Sharper.GstarCAD.Extensions.Geometry
             Vector3d normal = arc.Normal;
             Matrix3d wcs2Ocs = Matrix3d.WorldToPlane(normal);
             double elevation = arc.Center.TransformBy(wcs2Ocs).Z;
-            if (Math.Abs(elevation - point.TransformBy(wcs2Ocs).Z) < Tolerance.Global.EqualPoint)
-                throw new GrxCAD.Runtime.Exception(
-                    GrxCAD.Runtime.ErrorStatus.NonCoplanarGeometry);
+            if (Abs(elevation - point.TransformBy(wcs2Ocs).Z) < Tolerance.Global.EqualPoint)
+                throw new Exception(ErrorStatus.NonCoplanarGeometry);
 
             Plane plane = new Plane(Point3d.Origin, normal);
             CircularArc2d circularArc2d = new CircularArc2d(arc.Center.Convert2d(plane), arc.Radius);
@@ -60,7 +66,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// <param name="other">The CircularArc2d to which searched for tangents.</param>
         /// <param name="tangentType">An enum value specifying which type of tangent is returned.</param>
         /// <returns>An array of LineSegment3d representing the tangents (maybe 2 or 4) or <c>null</c> if there is none.</returns>
-        /// <exception cref="GrxCAD.Runtime.Exception">
+        /// <exception cref="Exception">
         /// eNonCoplanarGeometry is thrown if the objects do not lies on the same plane.</exception>
         public static LineSegment3d[] GetTangentsTo(this CircularArc3d arc, CircularArc3d other,
             TangentType tangentType)
@@ -70,9 +76,8 @@ namespace Sharper.GstarCAD.Extensions.Geometry
             Matrix3d wcs2Ocs = Matrix3d.WorldToPlane(normal);
             double elevation = arc.Center.TransformBy(wcs2Ocs).Z;
             if (!(normal.IsParallelTo(other.Normal) &&
-                  Math.Abs(elevation - other.Center.TransformBy(wcs2Ocs).Z) < Tolerance.Global.EqualPoint))
-                throw new GrxCAD.Runtime.Exception(
-                    GrxCAD.Runtime.ErrorStatus.NonCoplanarGeometry);
+                  Abs(elevation - other.Center.TransformBy(wcs2Ocs).Z) < Tolerance.Global.EqualPoint))
+                throw new Exception(ErrorStatus.NonCoplanarGeometry);
 
             Plane plane = new Plane(Point3d.Origin, normal);
             CircularArc2d circularArc2d1 = new CircularArc2d(arc.Center.Convert2d(plane), arc.Radius);

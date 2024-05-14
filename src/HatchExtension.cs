@@ -1,7 +1,13 @@
 ﻿using System.Collections.Generic;
-using GrxCAD.DatabaseServices;
-using GrxCAD.Geometry;
 using static System.Math;
+
+#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+using Gssoft.Gscad.DatabaseServices;
+#else
+using GrxCAD.Geometry;
+using GrxCAD.DatabaseServices;
+#endif
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {

@@ -1,6 +1,12 @@
 ﻿using System;
-using GrxCAD.DatabaseServices;
+
+#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+using Gssoft.Gscad.DatabaseServices;
+#else
 using GrxCAD.Geometry;
+using GrxCAD.DatabaseServices;
+#endif
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {
@@ -30,7 +36,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// <param name="ellipse">The instance to which this method applies.</param>
         /// <param name="angle">Angle.</param>
         /// <returns>The parameter corresponding to the angle.</returns>
-        public static double GetParamAtAngle(this Ellipse ellipse, double angle) =>
+        public static double GetParameterAtAngle(this Ellipse ellipse, double angle) =>
             Math.Atan2(ellipse.MajorRadius * Math.Sin(angle), ellipse.MinorRadius * Math.Cos(angle));
 
         /// <summary>
@@ -39,7 +45,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// <param name="ellipse">The instance to which this method applies.</param>
         /// <param name="param">Parameter.</param>
         /// <returns>The angle corresponding to the parameter.</returns>
-        public static double GetAngleAtParam(this Ellipse ellipse, double param) =>
+        public static double GetAngleAtParameter(this Ellipse ellipse, double param) =>
             Math.Atan2(ellipse.MinorRadius * Math.Sin(param), ellipse.MajorRadius * Math.Cos(param));
     }
 }

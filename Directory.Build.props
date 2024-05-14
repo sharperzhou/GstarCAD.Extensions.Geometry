@@ -1,11 +1,22 @@
 ﻿<Project>
+<PropertyGroup>
+    <GstarCAD24>True</GstarCAD24>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)|$(GstarCAD24)' == 'net48|True'">
+    <DefineConstants>$(DefineConstants);GSTARCADGREATERTHAN24</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GstarCAD24)' == 'True'">
+    <FileVersion>2024.4</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GstarCAD24)' != 'True'">
+    <FileVersion>2023.1</FileVersion>
+  </PropertyGroup>
   <PropertyGroup>
     <OutputPath>$(SolutionDir)out\$(Configuration)</OutputPath>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <Authors>Sharper</Authors>
     <Version>0.8.0.0</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>2022.1</FileVersion>
     <PackageVersion>$(FileVersion)</PackageVersion>
     <Title>GstarCAD Extension Library</Title>
     <Product>GstarCAD Extension Library</Product>

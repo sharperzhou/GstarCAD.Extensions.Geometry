@@ -1,10 +1,19 @@
-﻿using System;
-using GrxCAD.ApplicationServices;
-using GrxCAD.DatabaseServices;
-using GrxCAD.EditorInput;
+﻿using static System.Math;
+
+#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+using Gssoft.Gscad.DatabaseServices;
+using Gssoft.Gscad.ApplicationServices.Core;
+using Gssoft.Gscad.EditorInput;
+using Gssoft.Gscad.Runtime;
+#else
 using GrxCAD.Geometry;
+using GrxCAD.DatabaseServices;
+using GrxCAD.ApplicationServices;
+using GrxCAD.EditorInput;
 using GrxCAD.Runtime;
-using Exception = GrxCAD.Runtime.Exception;
+#endif
+
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {
@@ -85,8 +94,8 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         public static Point3d ToPolar(this Point3d point, double angle, double distance)
         {
             return new Point3d(
-                point.X + distance * Math.Cos(angle),
-                point.Y + distance * Math.Sin(angle),
+                point.X + distance * Cos(angle),
+                point.Y + distance * Sin(angle),
                 point.Z);
         }
 
@@ -97,7 +106,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// <param name="from">The origin coordinate system.</param>
         /// <param name="to">The destination coordinate system.</param>
         /// <returns>The corresponding Point3d.</returns>
-        /// <exception cref="GrxCAD.Runtime.Exception">
+        /// <exception cref="Exception">
         /// eInvalidInput thrown of 3 (CoordinateSystem.PSDCS) is used with another flag than 2 (CoordinateSystem.DCS).
         /// </exception>
         public static Point3d Transform(this Point3d point, CoordinateSystem from, CoordinateSystem to)
@@ -114,7 +123,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// <param name="from">The origin coordinate system.</param>
         /// <param name="to">The destination coordinate system.</param>
         /// <returns>The corresponding Point3d.</returns>
-        /// <exception cref="GrxCAD.Runtime.Exception">
+        /// <exception cref="Exception">
         /// eInvalidInput thrown of 3 (CoordinateSystem.PSDCS) is used with another flag than 2 (CoordinateSystem.DCS).
         /// </exception>
         public static Point3d Transform(this Point3d point, Editor editor, CoordinateSystem from, CoordinateSystem to)

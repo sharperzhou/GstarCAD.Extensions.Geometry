@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GrxCAD.DatabaseServices;
+
+#if NET48_OR_GREATER && GSTARCADGREATERTHAN24
+using Gssoft.Gscad.Geometry;
+using Gssoft.Gscad.DatabaseServices;
+using AcRx = Gssoft.Gscad.Runtime;
+#else
 using GrxCAD.Geometry;
+using GrxCAD.DatabaseServices;
 using AcRx = GrxCAD.Runtime;
+#endif
 
 namespace Sharper.GstarCAD.Extensions.Geometry
 {
@@ -17,7 +24,7 @@ namespace Sharper.GstarCAD.Extensions.Geometry
         /// </summary>
         /// <param name="polyline">The instance to which this method applies.</param>
         /// <returns>The list of vertices.</returns>
-        /// <exception cref="GrxCAD.Runtime.Exception">
+        /// <exception cref="AcRx.Exception">
         /// eNoActiveTransactions is thrown if the method is called outside of a Transaction.</exception>
         public static List<Vertex2d> GetVertices(this Polyline2d polyline)
         {
